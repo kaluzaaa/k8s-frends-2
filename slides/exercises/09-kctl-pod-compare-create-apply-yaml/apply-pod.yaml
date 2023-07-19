@@ -1,0 +1,102 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"v1","kind":"Pod","metadata":{"annotations":{},"name":"dumpster-pod","namespace":"default"},"spec":{"containers":[{"image":"gutek/dumpster:v1","name":"dumpster-pod-container","ports":[{"containerPort":8080}]}]}}
+  creationTimestamp: "2023-06-29T07:45:28Z"
+  name: dumpster-pod
+  namespace: default
+  resourceVersion: "52599"
+  uid: 0d52891c-224c-4e66-aab5-0f1ae7c57268
+spec:
+  containers:
+  - image: gutek/dumpster:v1
+    imagePullPolicy: IfNotPresent
+    name: dumpster-pod-container
+    ports:
+    - containerPort: 8080
+      protocol: TCP
+    resources: {}
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-hfrp8
+      readOnly: true
+  dnsPolicy: ClusterFirst
+  enableServiceLinks: true
+  nodeName: docker-desktop
+  preemptionPolicy: PreemptLowerPriority
+  priority: 0
+  restartPolicy: Always
+  schedulerName: default-scheduler
+  securityContext: {}
+  serviceAccount: default
+  serviceAccountName: default
+  terminationGracePeriodSeconds: 30
+  tolerations:
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 300
+  volumes:
+  - name: kube-api-access-hfrp8
+    projected:
+      defaultMode: 420
+      sources:
+      - serviceAccountToken:
+          expirationSeconds: 3607
+          path: token
+      - configMap:
+          items:
+          - key: ca.crt
+            path: ca.crt
+          name: kube-root-ca.crt
+      - downwardAPI:
+          items:
+          - fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+            path: namespace
+status:
+  conditions:
+  - lastProbeTime: null
+    lastTransitionTime: "2023-06-29T07:45:29Z"
+    status: "True"
+    type: Initialized
+  - lastProbeTime: null
+    lastTransitionTime: "2023-06-29T07:45:30Z"
+    status: "True"
+    type: Ready
+  - lastProbeTime: null
+    lastTransitionTime: "2023-06-29T07:45:30Z"
+    status: "True"
+    type: ContainersReady
+  - lastProbeTime: null
+    lastTransitionTime: "2023-06-29T07:45:29Z"
+    status: "True"
+    type: PodScheduled
+  containerStatuses:
+  - containerID: docker://864870d5bac2e52a49a316a7769336de16785eb34e0e318398400583f9a6915f
+    image: gutek/dumpster:v1
+    imageID: docker-pullable://gutek/dumpster@sha256:76ddbed27cf8395b88dcf1027e0a8507d6638724f9b2827098e85489c4c4d050
+    lastState: {}
+    name: dumpster-pod-container
+    ready: true
+    restartCount: 0
+    started: true
+    state:
+      running:
+        startedAt: "2023-06-29T07:45:30Z"
+  hostIP: 192.168.65.4
+  phase: Running
+  podIP: 10.1.0.30
+  podIPs:
+  - ip: 10.1.0.30
+  qosClass: BestEffort
+  startTime: "2023-06-29T07:45:29Z"
