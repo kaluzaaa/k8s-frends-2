@@ -42,7 +42,7 @@ metadata:
     kubernetes.io/ingress.class: "nginx"
 spec:
   rules:
-  - host: demo-app.frends2.kaluzny.io
+  - host: #{ingress}#
     http:
       paths:
       - pathType: Prefix
