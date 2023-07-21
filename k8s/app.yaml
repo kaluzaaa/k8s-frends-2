@@ -20,11 +20,9 @@ spec:
             cpu: "500m"
         ports:
         - containerPort: 3000
-        env:
-        - name: COSMOS_ENDPOINT
-          value: "https://cosmos-dapr.documents.azure.com:443/"
-        - name: COSMOS_KEY
-          value: KKwBBgqiaOCJkfkuvxmm7QLu6nutdd99VlfcWH8eQRZOIx5nSoaMzoP8FuvW6AwBT0adUC6C6oMhACDbLTatRg==
+        envFrom:
+        - secretRef:
+            name: cosmos-config
         volumeMounts:
         - name: demo-app-config
           mountPath: /app/appsettings.json
