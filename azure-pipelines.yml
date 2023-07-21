@@ -34,7 +34,7 @@ stages:
       env: dev
     jobs:
       - deployment: DeployDEV
-        environment: $(env)
+        environment: env
         pool:
           vmImage: ubuntu-latest
         strategy:
@@ -81,7 +81,7 @@ stages:
       env: prod
     jobs:
       - deployment: DeployPROD
-        environment: $(env)
+        environment: prod
         pool:
           vmImage: ubuntu-latest
         strategy:
