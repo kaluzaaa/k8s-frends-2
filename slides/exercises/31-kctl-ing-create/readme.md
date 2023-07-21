@@ -4,4 +4,4 @@
 - create ingress that will map paths based on deployment name
 - use ingress base file: `ingress.yaml`
 - validate that you can open pages for each of 3 deployments
-- as hostname use yourname.frends.kaluzny.io
+- as hostname use yourname.frends2.kaluzny.io
