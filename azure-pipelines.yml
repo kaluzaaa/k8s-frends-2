@@ -61,7 +61,9 @@ stages:
                 - task: CmdLine@2
                   inputs:
                    script: 'kubectl create cm demo-app-config  --from-file=$(Pipeline.Workspace)/$(env)/appsettings.json -o yaml --dry-run=client > $(Pipeline.Workspace)/cm.yaml'
-
+                - task: CmdLine@2
+                  inputs:
+                   script: 'kubectl create secret generic cosmos-config --from-literal=COSMOS_ENDPOINT=$(COSMOS_ENDPOINT_DEV) --from-literal=COSMOS_KEY=$(COSMOS_KEY_DEV)  -o yaml --dry-run=client > $(Pipeline.Workspace)/secret.yaml'
                 - task: replacetokens@5
                   inputs:
                     targetFiles: '$(Pipeline.Workspace)/*.yaml'
