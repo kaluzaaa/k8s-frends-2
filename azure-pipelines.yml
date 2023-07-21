@@ -15,5 +15,5 @@ steps:
     containerRegistry: 'acr'
     repository: 'demo-app'
     command: 'buildAndPush'
-    Dockerfile: '**/src/Dockerfile'
-    buildContext: '**/src'
+    Dockerfile: 'src/Dockerfile'
+    buildContext: 'src/.'
