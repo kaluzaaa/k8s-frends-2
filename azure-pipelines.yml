@@ -34,7 +34,7 @@ stages:
       env: dev
     jobs:
       - deployment: DeployDEV
-        environment: env
+        environment: dev
         pool:
           vmImage: ubuntu-latest
         strategy:
