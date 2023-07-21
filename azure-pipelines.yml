@@ -26,3 +26,29 @@ stages:
             targetPath: 'k8s'
             artifact: 'manifest'
             publishLocation: 'pipeline'
+  - stage: DeployDEV
+    displayName: "Deploy to DEV"
+    dependsOn: Build
+    jobs:
+      - deployment: DeployDEV
+        environment: dev
+        pool:
+          vmImage: ubuntu-latest
+        strategy:
+          runOnce:
+            deploy:
+              steps:
+                - task: DownloadPipelineArtifact@2
+                  inputs:
+                    buildType: 'current'
+                    artifactName: 'manifest'
+                    targetPath: '$(Pipeline.Workspace)'
+                - task: KubernetesManifest@1
+                  inputs:
+                    action: 'deploy'
+                    connectionType: 'kubernetesServiceConnection'
+                    kubernetesServiceConnection: 'dev-frends-dev-demo-app-1689928780435'
+                    namespace: 'dev'
+                    manifests: '$(Pipeline.Workspace)/*.yaml'
+                    containers: 'frends2demo.azurecr.io/demo-app:$(Build.BuildId)'
+                
