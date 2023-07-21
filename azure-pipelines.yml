@@ -21,3 +21,8 @@ stages:
             command: 'buildAndPush'
             Dockerfile: 'src/Dockerfile'
             buildContext: 'src/.'
+        - task: PublishPipelineArtifact@1
+          inputs:
+            targetPath: 'k8s'
+            artifact: 'manifest'
+            publishLocation: 'pipeline'
