@@ -48,7 +48,7 @@ stages:
                     action: 'deploy'
                     connectionType: 'kubernetesServiceConnection'
                     kubernetesServiceConnection: 'dev-frends-dev-demo-app-1689928780435'
-                    namespace: 'dev'
+                    namespace: 'dev-demo-app'
                     manifests: '$(Pipeline.Workspace)/*.yaml'
                     containers: 'frends2demo.azurecr.io/demo-app:$(Build.BuildId)'
                 
