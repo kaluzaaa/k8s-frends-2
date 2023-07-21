@@ -29,6 +29,8 @@ stages:
   - stage: DeployDEV
     displayName: "Deploy to DEV"
     dependsOn: Build
+    variables:
+      ingress: "dev-demo-app.frends2.kaluzny.io"
     jobs:
       - deployment: DeployDEV
         environment: dev
@@ -43,6 +45,19 @@ stages:
                     buildType: 'current'
                     artifactName: 'manifest'
                     targetPath: '$(Pipeline.Workspace)'
+                - task: replacetokens@5
+                  inputs:
+                    targetFiles: '$(Pipeline.Workspace)/*.yaml'
+                    encoding: 'auto'
+                    tokenPattern: 'default'
+                    writeBOM: true
+                    actionOnMissing: 'warn'
+                    keepToken: false
+                    actionOnNoFiles: 'continue'
+                    enableTransforms: false
+                    enableRecursion: false
+                    useLegacyPattern: false
+                    enableTelemetry: true
                 - task: KubernetesManifest@1
                   inputs:
                     action: 'deploy'
