@@ -20,6 +20,14 @@ spec:
             cpu: "500m"
         ports:
         - containerPort: 3000
+        volumeMounts:
+        - name: demo-app-config
+          mountPath: /app/appsettings.json
+          subPath: appsettings.json
+      volumes:
+      - name: demo-app-config
+        configMap:
+          name: demo-app-config
 ---
 apiVersion: v1
 kind: Service
