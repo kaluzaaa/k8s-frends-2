@@ -75,7 +75,7 @@ stages:
 
   - stage: DeployPROD
     displayName: "Deploy to PROD"
-    dependsOn: Build
+    dependsOn: DeployDEV
     variables:
       ingress: "prod-demo-app.frends2.kaluzny.io"
       env: prod
