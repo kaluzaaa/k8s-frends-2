@@ -75,12 +75,12 @@ stages:
 
   - stage: DeployPROD
     displayName: "Deploy to PROD"
-    dependsOn: DeployDEV
+    dependsOn: DeployPROD
     variables:
       ingress: "prod-demo-app.frends2.kaluzny.io"
       env: prod
     jobs:
-      - deployment: DeployDEV
+      - deployment: DeployPROD
         environment: $(env)
         pool:
           vmImage: ubuntu-latest
