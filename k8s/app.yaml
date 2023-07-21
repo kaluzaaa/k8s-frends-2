@@ -29,6 +29,7 @@ spec:
         configMap:
           name: demo-app-config
 ---
+apiVersion: autoscaling/v1
 kind: HorizontalPodAutoscaler
 metadata:
   name: demo-app
